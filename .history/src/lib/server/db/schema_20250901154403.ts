@@ -10,9 +10,6 @@ import {
   } from 'drizzle-orm/pg-core';
   import type { AdapterAccount } from '@auth/core/adapters';
   
-  // Define user roles enum
-  export const userRoleEnum = pgEnum('user_role', ['user', 'admin']);
-  
   export const users = pgTable('users', {
 	id: text('id').notNull().primaryKey(),
 	name: text('name'),
@@ -20,7 +17,6 @@ import {
 	emailVerified: timestamp('emailVerified', { mode: 'date' }),
 	image: text('image'),
 	hashedPassword: text('hashed_password'), // Your custom field for password
-	role: userRoleEnum('role').notNull().default('user'), // Add role with default 'user'
   });
   
   export const accounts = pgTable(

@@ -20,7 +20,6 @@ import {
 	emailVerified: timestamp('emailVerified', { mode: 'date' }),
 	image: text('image'),
 	hashedPassword: text('hashed_password'), // Your custom field for password
-	role: userRoleEnum('role').notNull().default('user'), // Add role with default 'user'
   });
   
   export const accounts = pgTable(

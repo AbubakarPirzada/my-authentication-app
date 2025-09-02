@@ -15,6 +15,13 @@
       "when": 1756664589954,
       "tag": "0001_easy_colonel_america",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756723466658,
+      "tag": "0002_massive_monster_badoon",
+      "breakpoints": true
     }
   ]
 }

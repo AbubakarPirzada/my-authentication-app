@@ -104,30 +104,6 @@
 			</div>
 		</div>
 	</nav>
-	
-	<!-- Mobile Navigation Menu (hidden by default) -->
-	<div class="md:hidden bg-white border-b border-gray-200 px-4 py-2">
-		<div class="flex flex-wrap justify-center gap-4">
-			<a 
-				href="/about" 
-				class="text-gray-700 hover:text-indigo-600 text-sm font-medium transition-colors duration-200"
-			>
-				About
-			</a>
-			<a 
-				href="/faq" 
-				class="text-gray-700 hover:text-indigo-600 text-sm font-medium transition-colors duration-200"
-			>
-				FAQ
-			</a>
-			<a 
-				href="/contact" 
-				class="text-gray-700 hover:text-indigo-600 text-sm font-medium transition-colors duration-200"
-			>
-				Contact
-			</a>
-		</div>
-	</div>
 </header>
 
 <!-- Main Content Area -->
