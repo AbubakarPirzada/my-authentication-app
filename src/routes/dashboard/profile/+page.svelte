@@ -152,6 +152,91 @@
 			</div>
 		</div>
 
+		<!-- Password Management Section -->
+		<div class="bg-white shadow rounded-lg mt-8">
+			<div class="px-6 py-8">
+				<div class="border-b border-gray-200 pb-6">
+					<h3 class="text-lg font-medium text-gray-900 mb-2">Password & Security</h3>
+					<p class="text-sm text-gray-600">Manage your account password and security settings.</p>
+				</div>
+
+				<!-- Change Password Success Message -->
+				{#if (form as any)?.passwordResetSent}
+					<div class="mt-6 p-4 rounded-md bg-green-50 border border-green-200">
+						<div class="flex">
+							<div class="flex-shrink-0">
+								<svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+									<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+								</svg>
+							</div>
+							<div class="ml-3">
+								<h3 class="text-sm font-medium text-green-800">Password Reset Email Sent!</h3>
+								<div class="mt-2 text-sm text-green-700">
+									<p>We've sent a password reset link to <strong>{data.user.email}</strong>. Please check your email and follow the instructions to change your password.</p>
+									<p class="mt-2 font-medium">You will need to log in again once you complete the password change.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{/if}
+
+				<!-- Change Password Error Message -->
+				{#if (form as any)?.passwordResetError}
+					<div class="mt-6 p-4 rounded-md bg-red-50 border border-red-200">
+						<div class="flex">
+							<div class="flex-shrink-0">
+								<svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+									<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+								</svg>
+							</div>
+							<div class="ml-3">
+								<h3 class="text-sm font-medium text-red-800">Error</h3>
+								<div class="mt-2 text-sm text-red-700">
+									<p>{(form as any).passwordResetError}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{/if}
+
+				<div class="mt-6">
+					<div class="bg-blue-50 border border-blue-200 rounded-md p-4 mb-6">
+						<div class="flex">
+							<div class="flex-shrink-0">
+								<svg class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+									<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+								</svg>
+							</div>
+							<div class="ml-3">
+								<h3 class="text-sm font-medium text-blue-800">How Password Change Works</h3>
+								<div class="mt-2 text-sm text-blue-700">
+									<p>To change your password, we'll send a secure reset link to your email address. After setting your new password, please log in again with your new credentials.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<form method="POST" action="?/requestPasswordReset" use:enhance class="space-y-4">
+						<div class="flex items-center justify-between p-4 bg-gray-50 rounded-md">
+							<div>
+								<h4 class="text-sm font-medium text-gray-900">Current Password</h4>
+								<p class="text-sm text-gray-600">Last updated: Never shown for security</p>
+							</div>
+							<button
+								type="submit"
+								class="inline-flex items-center px-4 py-2 border border-indigo-300 rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-white hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
+							>
+								<svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m0 0a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2m0 0V7a2 2 0 012-2h4a2 2 0 012 2v2m-6 6h4" />
+								</svg>
+								Change Password
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
 		<!-- Navigation -->
 		<div class="mt-8 flex justify-center">
 			<a 

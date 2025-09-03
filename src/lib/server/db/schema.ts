@@ -66,3 +66,13 @@ import {
 	  compoundKey: primaryKey({ columns: [vt.identifier, vt.token] })
 	})
   );
+
+  // Password reset tokens table
+  export const passwordResetTokens = pgTable('password_reset_tokens', {
+	id: text('id').notNull().primaryKey(),
+	email: text('email').notNull(),
+	token: text('token').notNull().unique(),
+	expires: timestamp('expires', { mode: 'date' }).notNull(),
+	used: timestamp('used', { mode: 'date' }),
+	createdAt: timestamp('created_at', { mode: 'date' }).notNull().defaultNow()
+  });
