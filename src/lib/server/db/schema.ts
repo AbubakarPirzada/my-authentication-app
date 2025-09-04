@@ -6,12 +6,17 @@ import {
 	text,
 	primaryKey,
 	integer,
-	pgEnum
+	pgEnum,
+	uuid,
+	boolean
   } from 'drizzle-orm/pg-core';
   import type { AdapterAccount } from '@auth/core/adapters';
   
   // Define user roles enum
   export const userRoleEnum = pgEnum('user_role', ['user', 'admin']);
+  
+  // Define message roles enum for chat
+  export const messageRoleEnum = pgEnum('message_role', ['user', 'assistant', 'system']);
   
   export const users = pgTable('users', {
 	id: text('id').notNull().primaryKey(),
@@ -74,5 +79,44 @@ import {
 	token: text('token').notNull().unique(),
 	expires: timestamp('expires', { mode: 'date' }).notNull(),
 	used: timestamp('used', { mode: 'date' }),
+	createdAt: timestamp('created_at', { mode: 'date' }).notNull().defaultNow()
+  });
+
+  // Chat Sessions Table
+  export const chatSessions = pgTable('chat_sessions', {
+	id: uuid('id').defaultRandom().primaryKey(),
+	userId: text('user_id')
+	  .notNull()
+	  .references(() => users.id, { onDelete: 'cascade' }),
+	title: text('title').notNull().default('New Chat'),
+	isActive: boolean('is_active').notNull().default(true),
+	createdAt: timestamp('created_at', { mode: 'date' }).notNull().defaultNow(),
+	updatedAt: timestamp('updated_at', { mode: 'date' }).notNull().defaultNow()
+  });
+
+  // Chat Messages Table
+  export const chatMessages = pgTable('chat_messages', {
+	id: uuid('id').defaultRandom().primaryKey(),
+	sessionId: uuid('session_id')
+	  .notNull()
+	  .references(() => chatSessions.id, { onDelete: 'cascade' }),
+	role: messageRoleEnum('role').notNull(),
+	content: text('content').notNull(),
+	tokens: integer('tokens').default(0),
+	createdAt: timestamp('created_at', { mode: 'date' }).notNull().defaultNow()
+  });
+
+  // Chat Analytics Table (for tracking usage)
+  export const chatAnalytics = pgTable('chat_analytics', {
+	id: uuid('id').defaultRandom().primaryKey(),
+	userId: text('user_id')
+	  .notNull()
+	  .references(() => users.id, { onDelete: 'cascade' }),
+	sessionId: uuid('session_id')
+	  .notNull()
+	  .references(() => chatSessions.id, { onDelete: 'cascade' }),
+	messageCount: integer('message_count').notNull().default(0),
+	totalTokens: integer('total_tokens').notNull().default(0),
+	duration: integer('duration').default(0), // in seconds
 	createdAt: timestamp('created_at', { mode: 'date' }).notNull().defaultNow()
   });

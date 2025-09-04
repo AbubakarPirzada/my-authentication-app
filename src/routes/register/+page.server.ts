@@ -56,8 +56,10 @@ export const actions = {
 
       console.log('User registered successfully:', email);
 
-      // Redirect to login page upon successful registration
-      throw redirect(303, '/login');
+      // Return success message instead of redirecting immediately
+      return {
+        success: 'Registration successful! You can now sign in with your credentials.'
+      };
       
     } catch (error) {
       console.error('Registration error:', error);
