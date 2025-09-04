@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores';
   
   // FAQ data
@@ -65,9 +65,9 @@
     }
   ];
   
-  let openIndex = null;
+  let openIndex: number | null = null;
   
-  function toggleFAQ(index) {
+  function toggleFAQ(index: number) {
     openIndex = openIndex === index ? null : index;
   }
 </script>
@@ -77,11 +77,16 @@
   <meta name="description" content="Find answers to common questions about our authentication platform, user management, and security features." />
 </svelte:head>
 
-<div class="min-h-screen bg-gray-50">
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
   <!-- Hero Section -->
-  <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-16">
+  <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
+        <div class="mx-auto h-20 w-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-6">
+          <svg class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
         <h1 class="text-4xl md:text-6xl font-bold mb-6">Frequently Asked Questions</h1>
         <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-90">
           Get answers to common questions about our authentication platform
@@ -93,29 +98,29 @@
   <!-- FAQs Content -->
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <!-- Quick Links -->
-    <div class="bg-white rounded-lg shadow-lg p-6 mb-12">
-      <h2 class="text-2xl font-bold text-gray-900 mb-4">Quick Navigation</h2>
+    <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl shadow-2xl border border-slate-700/50 p-6 mb-12">
+      <h2 class="text-2xl font-bold text-white mb-4">Quick Navigation</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <a href="#getting-started" class="text-blue-600 hover:text-blue-800 font-medium">Getting Started</a>
-        <a href="#account-management" class="text-blue-600 hover:text-blue-800 font-medium">Account Management</a>
-        <a href="#admin-features" class="text-blue-600 hover:text-blue-800 font-medium">Admin Features</a>
-        <a href="#security" class="text-blue-600 hover:text-blue-800 font-medium">Security</a>
-        <a href="#technical" class="text-blue-600 hover:text-blue-800 font-medium">Technical</a>
-        <a href="/contact" class="text-blue-600 hover:text-blue-800 font-medium">Still have questions?</a>
+        <a href="#getting-started" class="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-200">Getting Started</a>
+        <a href="#account-management" class="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-200">Account Management</a>
+        <a href="#admin-features" class="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-200">Admin Features</a>
+        <a href="#security" class="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-200">Security</a>
+        <a href="#technical" class="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-200">Technical</a>
+        <a href="/contact" class="text-purple-400 hover:text-purple-300 font-medium transition-colors duration-200">Still have questions?</a>
       </div>
     </div>
 
     <!-- FAQ Items -->
     <div class="space-y-4">
       {#each faqs as faq, index}
-        <div class="bg-white rounded-lg shadow-md">
+        <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-lg border border-slate-700/50">
           <button 
-            class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset rounded-lg"
+            class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-slate-700/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-inset rounded-xl transition-all duration-200"
             on:click={() => toggleFAQ(index)}
           >
-            <h3 class="text-lg font-medium text-gray-900 pr-4">{faq.question}</h3>
+            <h3 class="text-lg font-medium text-white pr-4">{faq.question}</h3>
             <svg 
-              class="h-5 w-5 text-gray-500 transform transition-transform duration-200 {openIndex === index ? 'rotate-180' : ''}"
+              class="h-5 w-5 text-gray-400 transform transition-transform duration-200 {openIndex === index ? 'rotate-180' : ''}"
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
@@ -126,7 +131,7 @@
           
           {#if openIndex === index}
             <div class="px-6 pb-4">
-              <p class="text-gray-600 leading-relaxed">{faq.answer}</p>
+              <p class="text-gray-300 leading-relaxed">{faq.answer}</p>
             </div>
           {/if}
         </div>
@@ -134,9 +139,9 @@
     </div>
 
     <!-- Help Section -->
-    <div class="mt-16 text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg p-12">
+    <div class="mt-16 text-center bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl p-12 shadow-2xl">
       <div class="max-w-2xl mx-auto">
-        <div class="bg-white bg-opacity-20 rounded-full p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
+        <div class="bg-white/20 backdrop-blur-sm rounded-full p-4 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
           <svg class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
@@ -148,13 +153,13 @@
         <div class="space-x-4">
           <a 
             href="/contact" 
-            class="inline-flex items-center px-8 py-3 bg-white text-blue-600 hover:bg-gray-100 font-medium rounded-lg transition-colors duration-200"
+            class="inline-flex items-center px-8 py-3 bg-white text-purple-600 hover:bg-gray-100 font-medium rounded-xl transition-all duration-200 shadow-lg"
           >
             Contact Support
           </a>
           <a 
             href="/about" 
-            class="inline-flex items-center px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-blue-600 font-medium rounded-lg transition-colors duration-200"
+            class="inline-flex items-center px-8 py-3 border-2 border-white text-white hover:bg-white hover:text-purple-600 font-medium rounded-xl transition-all duration-200 backdrop-blur-sm"
           >
             Learn More
           </a>
@@ -164,36 +169,36 @@
 
     <!-- Quick Tips -->
     <div class="mt-16">
-      <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Quick Tips</h2>
+      <h2 class="text-2xl font-bold text-white mb-8 text-center">Quick Tips</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <div class="bg-green-100 rounded-full p-3 w-12 h-12 mb-4 flex items-center justify-center">
-            <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-lg border border-slate-700/50 p-6">
+          <div class="bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full p-3 w-12 h-12 mb-4 flex items-center justify-center">
+            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Use Strong Passwords</h3>
-          <p class="text-gray-600 text-sm">Create passwords with at least 6 characters including numbers and special characters.</p>
+          <h3 class="text-lg font-semibold text-white mb-2">Use Strong Passwords</h3>
+          <p class="text-gray-300 text-sm">Create passwords with at least 6 characters including numbers and special characters.</p>
         </div>
         
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <div class="bg-blue-100 rounded-full p-3 w-12 h-12 mb-4 flex items-center justify-center">
-            <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-lg border border-slate-700/50 p-6">
+          <div class="bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full p-3 w-12 h-12 mb-4 flex items-center justify-center">
+            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Keep Profile Updated</h3>
-          <p class="text-gray-600 text-sm">Regularly update your profile information to ensure account security and better experience.</p>
+          <h3 class="text-lg font-semibold text-white mb-2">Keep Profile Updated</h3>
+          <p class="text-gray-300 text-sm">Regularly update your profile information to ensure account security and better experience.</p>
         </div>
         
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <div class="bg-purple-100 rounded-full p-3 w-12 h-12 mb-4 flex items-center justify-center">
-            <svg class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-lg border border-slate-700/50 p-6">
+          <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-full p-3 w-12 h-12 mb-4 flex items-center justify-center">
+            <svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Remember to Logout</h3>
-          <p class="text-gray-600 text-sm">Always sign out when using shared or public computers to protect your account.</p>
+          <h3 class="text-lg font-semibold text-white mb-2">Remember to Logout</h3>
+          <p class="text-gray-300 text-sm">Always sign out when using shared or public computers to protect your account.</p>
         </div>
       </div>
     </div>
