@@ -3,8 +3,7 @@ import {
   getOrCreateActiveSession, 
   saveChatMessage, 
   getChatMessages, 
-  convertToAIMessages,
-  getChatSession
+  convertToAIMessages 
 } from '$lib/server/db/chat';
 import type { RequestHandler } from './$types';
 

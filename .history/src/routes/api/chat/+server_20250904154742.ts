@@ -3,8 +3,7 @@ import {
   getOrCreateActiveSession, 
   saveChatMessage, 
   getChatMessages, 
-  convertToAIMessages,
-  getChatSession
+  convertToAIMessages 
 } from '$lib/server/db/chat';
 import type { RequestHandler } from './$types';
 
@@ -73,15 +72,9 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
     // Get or create chat session
     console.log('Creating/getting chat session...');
-    let chatSession;
-    if (sessionId) {
-      // Try to get existing session
-      const existingSession = await getChatSession(sessionId, session.user.id);
-      chatSession = existingSession || await getOrCreateActiveSession(session.user.id);
-    } else {
-      // Create new session
-      chatSession = await getOrCreateActiveSession(session.user.id);
-    }
+    const chatSession = sessionId 
+      ? await getOrCreateActiveSession(session.user.id)
+      : await getOrCreateActiveSession(session.user.id);
     console.log('Chat session:', {
       id: chatSession.id,
       userId: chatSession.userId,
@@ -136,8 +129,6 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
     // Generate response
     console.log('Generating content with', geminiMessages.length, 'messages');
-    console.log('Gemini messages structure:', JSON.stringify(geminiMessages, null, 2));
-    
     const result = await model.generateContent({
       contents: geminiMessages
     });
