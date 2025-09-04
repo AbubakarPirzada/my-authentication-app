@@ -26,6 +26,7 @@ import {
 	image: text('image'),
 	hashedPassword: text('hashed_password'), // Your custom field for password
 	role: userRoleEnum('role').notNull().default('user'), // Add role with default 'user'
+	createdAt: timestamp('createdAt', { mode: 'date' }).notNull().defaultNow(), // Track user creation time
   });
   
   export const accounts = pgTable(
