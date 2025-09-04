@@ -81,7 +81,6 @@
 						Password
 					</label>
 					<div class="relative">
-<<<<<<< HEAD
 						<input
 							id="password"
 							name="password"
