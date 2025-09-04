@@ -1,13 +1,18 @@
-<div class="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8 bg-gray-50">
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
 	<div class="w-full max-w-md space-y-8">
 		<!-- Header -->
 		<div class="text-center">
-			<h2 class="mt-6 text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
-			<p class="mt-2 text-sm text-gray-600">
+			<div class="mx-auto h-12 w-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
+				<svg class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+				</svg>
+			</div>
+			<h2 class="text-3xl font-bold tracking-tight text-white">Sign in to your account</h2>
+			<p class="mt-2 text-sm text-gray-300">
 				Don't have an account?
 				<a
 					href="/register"
-					class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200"
+					class="font-medium text-purple-400 hover:text-purple-300 transition-colors duration-200"
 				>
 					Sign up
 				</a>
@@ -15,7 +20,7 @@
 		</div>
 
 		<!-- Login Form Card -->
-		<div class="bg-white py-8 px-6 shadow-lg rounded-lg border border-gray-200">
+		<div class="bg-slate-800/50 backdrop-blur-sm py-8 px-6 shadow-2xl rounded-2xl border border-slate-700/50">
 			<!--
         **FIX #1: Added method="POST" and the correct action attribute.
         This tells the form to send the data to the Auth.js credentials handler.
@@ -23,43 +28,60 @@
 			<form class="space-y-6" method="POST" action="/auth/callback/credentials">
 				<!-- Email Field -->
 				<div>
-					<label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+					<label for="email" class="block text-sm font-medium text-gray-300 mb-2">
 						Email address
 					</label>
-					<input
-						id="email"
-						name="email"
-						type="email"
-						autocomplete="email"
-						required
-						class="block w-full rounded-md border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-						placeholder="Enter your email"
-					/>
+					<div class="relative">
+						<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+							<svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+							</svg>
+						</div>
+						<input
+							id="email"
+							name="email"
+							type="email"
+							autocomplete="email"
+							required
+							class="block w-full pl-10 pr-3 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-200 backdrop-blur-sm"
+							placeholder="Enter your email"
+						/>
+					</div>
 				</div>
 
 				<!-- Password Field -->
 				<div>
-					<label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+					<label for="password" class="block text-sm font-medium text-gray-300 mb-2">
 						Password
 					</label>
-					<input
-						id="password"
-						name="password"
-						type="password"
-						autocomplete="current-password"
-						required
-						class="block w-full rounded-md border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-						placeholder="Enter your password"
-					/>
+					<div class="relative">
+						<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+							<svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+							</svg>
+						</div>
+						<input
+							id="password"
+							name="password"
+							type="password"
+							autocomplete="current-password"
+							required
+							class="block w-full pl-10 pr-3 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-200 backdrop-blur-sm"
+							placeholder="Enter your password"
+						/>
+					</div>
 				</div>
 
 				<!-- Submit Button -->
 				<div>
 					<button
 						type="submit"
-						class="group relative flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors duration-200"
+						class="group relative flex w-full justify-center items-center rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 text-sm font-semibold text-white hover:from-purple-700 hover:to-pink-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-500 transition-all duration-200 shadow-lg hover:shadow-purple-500/25"
 					>
-						Log In
+						<svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+						</svg>
+						Sign In
 					</button>
 				</div>
 			</form>
@@ -67,12 +89,8 @@
 
 		<!-- Additional Links -->
 		<div class="text-center">
-			<p class="text-xs text-gray-500">
-				<!--
-          **FIX #2: Changed href="#" to a valid path.
-          This will remove the a11y warning in your terminal.
-        -->
-				<a href="/forgot-password" class="text-indigo-600 hover:text-indigo-500"
+			<p class="text-xs text-gray-400">
+				<a href="/forgot-password" class="text-purple-400 hover:text-purple-300 transition-colors duration-200"
 					>Forgot your password?</a
 				>
 			</p>
