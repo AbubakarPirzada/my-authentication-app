@@ -34,24 +34,6 @@
 
 		<!-- Login Form Card -->
 		<div class="bg-slate-800/50 backdrop-blur-sm py-8 px-6 shadow-2xl rounded-2xl border border-slate-700/50">
-			<!-- Success Message -->
-			{#if showSuccessMessage}
-				<div class="mb-6 p-4 bg-green-500/10 border border-green-500/20 rounded-xl backdrop-blur-sm">
-					<div class="flex">
-						<div class="flex-shrink-0">
-							<svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
-								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-							</svg>
-						</div>
-						<div class="ml-3">
-							<h3 class="text-sm font-medium text-green-300">Password Reset Successful</h3>
-							<div class="mt-2 text-sm text-green-200">
-								<p>Your password has been updated successfully. You can now sign in with your new password.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			{/if}
 			<!--
         **FIX #1: Added method="POST" and the correct action attribute.
         This tells the form to send the data to the Auth.js credentials handler.
