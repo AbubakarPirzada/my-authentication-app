@@ -24,7 +24,6 @@ declare module '@auth/core/types' {
 			email?: string | null;
 			image?: string | null;
 			role?: 'user' | 'admin';
-			emailVerified?: Date | null;
 		} & DefaultSession['user'];
 	}
 

@@ -138,17 +138,10 @@ export async function sendEmailVerification(email: string, token: string): Promi
 	try {
 		const transporter = getTransporter();
 		
-		// Create the verification URL - Enhanced with debugging
+		// Create the verification URL
 		const verificationUrl = env.ORIGIN ? 
 			`${env.ORIGIN}/api/verify-email?token=${token}` : 
 			`http://localhost:5173/api/verify-email?token=${token}`;
-
-		// Debug logging to ensure correct URL generation
-		console.log('Generating verification URL:', {
-			ORIGIN: env.ORIGIN,
-			verificationUrl,
-			token: token.substring(0, 8) + '...' // Log partial token for debugging
-		});
 
 		// Email content
 		const mailOptions = {
@@ -231,7 +224,6 @@ If you didn't create an account with us, you can safely ignore this email.
 		console.log('Email verification sent successfully:', {
 			messageId: info.messageId,
 			recipient: email,
-			verificationUrl, // Log the full URL for debugging
 			previewUrl: nodemailer.getTestMessageUrl(info) // For Ethereal Email
 		});
 		

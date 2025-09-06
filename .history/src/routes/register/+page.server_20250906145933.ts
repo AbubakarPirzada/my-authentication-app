@@ -1,4 +1,5 @@
 import type { Actions } from './$types';
+import { redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { users, emailVerificationTokens } from '$lib/server/db/schema';
 import { sendEmailVerification } from '$lib/server/email';

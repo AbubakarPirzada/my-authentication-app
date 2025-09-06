@@ -1,4 +1,5 @@
 import type { Actions } from './$types';
+import { redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { users, emailVerificationTokens } from '$lib/server/db/schema';
 import { sendEmailVerification } from '$lib/server/email';
@@ -84,11 +85,8 @@ export const actions = {
 
       console.log('User registered successfully:', email);
 
-      // Return success response instead of redirecting
-      return {
-        success: 'Registration successful! Please check your email for a verification link.',
-        requiresVerification: true
-      };
+      // Redirect to email verification pending page
+      redirect(302, '/verify-email-pending');
       
     } catch (error) {
       console.error('Registration error:', error);
