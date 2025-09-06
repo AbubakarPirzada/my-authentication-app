@@ -7,7 +7,7 @@
 	let errorMessage = $state('');
 	
 	// Only set error message if there's actually an error
-	if (data.error && data.error !== '') {
+	if (data.error) {
 		switch (data.error) {
 			case 'invalid_verification_token':
 				errorMessage = 'Invalid or expired verification link. Please try registering again.';
@@ -27,9 +27,6 @@
 			default:
 				errorMessage = 'An error occurred. Please try again.';
 		}
-	} else {
-		// Explicitly clear error message when there's no error
-		errorMessage = '';
 	}
 </script>
 
