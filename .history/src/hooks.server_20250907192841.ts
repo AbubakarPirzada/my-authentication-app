@@ -20,14 +20,6 @@ export const { handle } = SvelteKitAuth({
     verificationTokensTable: schema.verificationTokens,
   }),
   providers: [
-    Google({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
-    }),
-    GitHub({
-      clientId: env.GITHUB_ID,
-      clientSecret: env.GITHUB_SECRET,
-    }),
     Credentials({
       name: 'credentials',
       credentials: {
