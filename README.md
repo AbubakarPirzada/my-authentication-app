@@ -1,39 +1,18 @@
 # My Authentication App
 
-A modern, full-stack authentication application with AI-powered chat assistance, built with SvelteKit. Features secure user management, intelligent chat support, and comprehensive admin controls with PostgreSQL database integration.
+A modern, full-stack authentication application built with SvelteKit, featuring secure user registration, login, and profile management with PostgreSQL database integration.
 
 ## 🚀 Features
 
-### 🔐 Authentication & Security
 - **User Authentication**: Secure registration and login system
-- **Password Security**: Bcrypt password hashing with salt rounds
+- **Password Security**: Bcrypt password hashing
 - **Session Management**: JWT-based session handling with Auth.js
 - **Profile Management**: User profile viewing and editing
-- **Password Recovery**: Email-based forgot password functionality
-- **Email Verification**: Secure account verification system
-
-### 🤖 AI Chat Assistant
-- **Intelligent Support**: AI-powered chat assistant using Google Gemini AI
-- **Session Management**: Persistent chat sessions with full history
-- **Real-time Chat**: Instant responses with streaming support
-- **Context Awareness**: AI understands platform features and can provide technical support
-- **Chat History**: Save and manage multiple conversation sessions
-
-### 👥 User Management
-- **Dashboard**: Personalized user dashboard with quick actions
-- **Admin Panel**: Comprehensive administrative interface
-- **User Statistics**: Track user activity and engagement
-- **Role Management**: Admin and user role separation
-
-### 📧 Email Integration
-- **Email Notifications**: Automated email sending with Nodemailer
-- **Email Verification**: Secure account verification emails
-- **Password Reset**: Email-based password recovery system
-
-### 🎨 Modern Interface
-- **Responsive Design**: Beautiful UI with Tailwind CSS 4.0
-- **Dark Theme**: Modern gradient design with purple/slate color scheme
-- **Interactive Components**: Smooth animations and transitions
+- **Dashboard**: Personalized user dashboard
+- **Password Recovery**: Forgot password functionality
+- **Admin Panel**: Administrative interface
+- **Database Integration**: PostgreSQL with Drizzle ORM
+- **Modern UI**: Responsive design with Tailwind CSS
 - **TypeScript**: Full type safety throughout the application
 
 ## 🛠️ Tech Stack
@@ -41,9 +20,7 @@ A modern, full-stack authentication application with AI-powered chat assistance,
 - **Frontend**: SvelteKit 2.22+ with Svelte 5
 - **Backend**: SvelteKit server-side functions
 - **Database**: PostgreSQL with Drizzle ORM
-- **AI Integration**: Google Gemini AI API
 - **Authentication**: Auth.js (formerly NextAuth.js) with SvelteKit adapter
-- **Email Service**: Nodemailer for email notifications
 - **Styling**: Tailwind CSS 4.0 with Forms plugin
 - **Password Hashing**: bcrypt
 - **Container**: Docker Compose for database
@@ -56,38 +33,22 @@ A modern, full-stack authentication application with AI-powered chat assistance,
 my-authentication-app/
 ├── src/
 │   ├── lib/
-│   │   ├── components/              # Reusable Svelte components
-│   │   │   ├── ChatInput.svelte     # AI chat input component
-│   │   │   ├── ChatMessage.svelte   # Chat message display
-│   │   │   ├── ChatSessionManager.svelte # Chat session management
-│   │   │   ├── ChatStats.svelte     # Chat statistics
-│   │   │   └── SimpleChatContainer.svelte # Main chat container
 │   │   └── server/
-│   │       ├── auth.ts              # Authentication utilities
-│   │       ├── email.ts             # Email service functions
 │   │       └── db/
-│   │           ├── index.ts         # Database configuration
-│   │           ├── schema.ts        # Database schema definitions
-│   │           └── chat.ts          # Chat-related database functions
+│   │           ├── index.ts          # Database configuration
+│   │           └── schema.ts         # Database schema definitions
 │   ├── routes/
 │   │   ├── +layout.svelte           # Global layout
 │   │   ├── +layout.server.ts        # Layout server functions
 │   │   ├── +page.svelte             # Home page
-│   │   ├── admin/                   # Admin panel with user management
-│   │   ├── api/                     # API endpoints
-│   │   │   ├── chat/                # AI chat API endpoints
-│   │   │   ├── health/              # Health check endpoint
-│   │   │   ├── resend-verification/ # Email verification resend
-│   │   │   └── verify-email/        # Email verification handler
-│   │   ├── chat/                    # AI chat interface
+│   │   ├── admin/                   # Admin panel
 │   │   ├── dashboard/               # User dashboard
 │   │   │   ├── +page.svelte
 │   │   │   └── profile/             # Profile management
 │   │   ├── forgot-password/         # Password recovery
 │   │   ├── login/                   # Login page
 │   │   ├── profile/                 # Public profile
-│   │   ├── register/                # User registration
-│   │   └── verify-email-pending/    # Email verification pending
+│   │   └── register/                # User registration
 │   ├── app.css                      # Global styles
 │   ├── app.html                     # HTML template
 │   └── hooks.server.ts              # Authentication configuration
@@ -122,12 +83,7 @@ my-authentication-app/
    Create a `.env` file in the root directory:
    ```env
    DATABASE_URL="postgresql://postgres:12345678@localhost:5432/my_authentication_db"
-   AUTH_SECRET="your-super-secret-auth-key-minimum-32-characters"
-   GEMINI_API_KEY="your-google-gemini-api-key"
-   EMAIL_HOST="smtp.gmail.com"
-   EMAIL_PORT="587"
-   EMAIL_USER="your-email@gmail.com"
-   EMAIL_PASS="your-app-password"
+   AUTH_SECRET="your-super-secret-auth-key-here"
    ```
 
 4. **Start the PostgreSQL database**
@@ -149,26 +105,14 @@ my-authentication-app/
 7. **Open your browser**
    Navigate to `http://localhost:5173`
 
-8. **Set up AI Chat (Optional)**
-   - Get a Google Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
-   - Add your `GEMINI_API_KEY` to the `.env` file
-   - See `GEMINI_API_SETUP.md` for detailed AI setup instructions
-
-9. **Create Admin User (Optional)**
-   ```bash
-   npm run create-admin
-   ```
-
 ## 🗄️ Database Setup
 
 The application uses PostgreSQL with Drizzle ORM. The database schema includes:
 
-- **Users Table**: User information with hashed passwords and roles
-- **Sessions Table**: Active user sessions for Auth.js
+- **Users Table**: User information with hashed passwords
+- **Sessions Table**: Active user sessions
 - **Accounts Table**: OAuth provider accounts (extensible)
 - **Verification Tokens**: Email verification and password reset tokens
-- **Chat Sessions**: AI chat conversation sessions
-- **Chat Messages**: Individual messages within chat sessions
 
 ### Database Commands
 
@@ -192,79 +136,40 @@ npm run db:studio
 ## 🔐 Authentication Features
 
 ### User Registration
-- Email validation and verification
+- Email validation
 - Password strength requirements (minimum 6 characters)
 - Duplicate email checking
-- Automatic password hashing with bcrypt
-- Email verification workflow
-- Redirect to verification pending page
+- Automatic password hashing
+- Redirect to login after successful registration
 
 ### User Login
 - Credentials-based authentication
 - Secure password verification
-- JWT session management with Auth.js
-- Email verification check
+- JWT session management
 - Automatic dashboard redirect
-- Session persistence across browser sessions
 
 ### Session Management
-- JWT-based sessions with Auth.js
-- Secure token handling and refresh
-- Database session storage
+- JWT-based sessions
+- Secure token handling
+- Automatic session refresh
 - Protected route middleware
-- Automatic session cleanup
 
 ### Password Security
-- bcrypt hashing with 12 salt rounds
+- bcrypt hashing with salt rounds
 - Secure password comparison
-- Email-based password reset functionality
-- Secure reset token generation and validation
-
-### Email Features
-- Email verification for new accounts
-- Password reset email notifications
-- Resend verification functionality
-- Customizable email templates
-
-## 🤖 AI Chat Features
-
-### Intelligent Assistant
-- **Google Gemini AI**: Powered by Google's latest Gemini AI model
-- **Context Awareness**: Understands platform features, security, and technical aspects
-- **Real-time Responses**: Instant AI responses with typing indicators
-- **Error Handling**: Graceful error handling with helpful setup instructions
-
-### Chat Session Management
-- **Persistent Sessions**: Save and resume chat conversations
-- **Session History**: Browse and search through previous conversations
-- **Session Organization**: Create, rename, and delete chat sessions
-- **Multi-session Support**: Switch between different conversation topics
-
-### Chat Interface
-- **Modern UI**: Beautiful gradient design with smooth animations
-- **Responsive Design**: Works seamlessly on desktop and mobile
-- **Quick Actions**: Pre-defined quick action buttons for common queries
-- **Message History**: Scroll through conversation history with smooth scrolling
-
-### AI Capabilities
-- **Platform Support**: Help with authentication, user management, and features
-- **Technical Guidance**: Troubleshooting and technical assistance
-- **Security Advice**: Best practices for security and data protection
-- **Feature Explanations**: Detailed explanations of platform capabilities
+- Password reset functionality
 
 ## 🎨 User Interface
 
 The application features a modern, responsive design built with Tailwind CSS:
 
-- **Home Page**: Welcome landing page with feature highlights
-- **Registration Page**: User signup form with email verification
-- **Login Page**: User authentication form with password recovery
-- **Dashboard**: Personalized user interface with quick actions and navigation
-- **AI Chat Interface**: Beautiful chat UI with session management
-- **Profile Management**: Edit user information and account settings
-- **Admin Panel**: Comprehensive administrative interface with user management
-- **Password Recovery**: Forgot password flow with email notifications
-- **Email Verification**: Pending verification page with resend functionality
+- **Home Page**: Welcome landing page
+- **Registration Page**: User signup form
+- **Login Page**: User authentication form
+- **Dashboard**: Personalized user interface with quick actions
+- **Profile Management**: Edit user information
+- **Admin Panel**: Administrative interface
+- **Password Recovery**: Forgot password flow
 
 ## 🔒 Security Features
 
@@ -285,17 +190,8 @@ The application features a modern, responsive design built with Tailwind CSS:
 | `/dashboard` | User dashboard | Protected |
 | `/dashboard/profile` | Profile management | Protected |
 | `/profile` | Public profile view | Public |
-| `/chat` | AI Chat Assistant | Protected |
-| `/admin` | Admin panel | Admin Only |
-| `/admin/users` | User management | Admin Only |
-| `/admin/stats` | Statistics dashboard | Admin Only |
-| `/admin/settings` | System settings | Admin Only |
+| `/admin` | Admin panel | Protected |
 | `/forgot-password` | Password recovery | Public |
-| `/verify-email-pending` | Email verification pending | Public |
-| `/reset-password/[token]` | Password reset with token | Public |
-| `/about` | About page | Public |
-| `/contact` | Contact page | Public |
-| `/faq` | Frequently asked questions | Public |
 
 ## 🛠️ Development Scripts
 
@@ -317,9 +213,6 @@ npm run db:push          # Push schema to database
 npm run db:generate      # Generate migrations
 npm run db:migrate       # Run migrations
 npm run db:studio        # Open Drizzle Studio
-
-# Admin
-npm run create-admin     # Create an admin user
 ```
 
 ## 🌐 Environment Variables
@@ -332,31 +225,15 @@ DATABASE_URL="postgresql://postgres:12345678@localhost:5432/my_authentication_db
 
 # Authentication
 AUTH_SECRET="your-super-secret-auth-key-minimum-32-characters"
-
-# AI Chat (Optional)
-GEMINI_API_KEY="your-google-gemini-api-key"
-
-# Email Service (Optional)
-EMAIL_HOST="smtp.gmail.com"
-EMAIL_PORT="587"
-EMAIL_USER="your-email@gmail.com"
-EMAIL_PASS="your-app-password"
 ```
-
-### Environment Variable Details
-
-- **DATABASE_URL**: PostgreSQL connection string
-- **AUTH_SECRET**: Secret key for JWT signing (minimum 32 characters)
-- **GEMINI_API_KEY**: Google Gemini AI API key (get from [Google AI Studio](https://makersuite.google.com/app/apikey))
-- **EMAIL_***: SMTP settings for email notifications (Gmail configuration shown)
 
 ## 📊 Database Management
 
-You can manage your PostgreSQL database using [[memory:7783668]]:
+You can manage your PostgreSQL database using:
 
-1. **Drizzle Studio**: Run `npm run db:studio` for a web-based interface (Recommended)
-2. **Command Line**: Use `psql` or any PostgreSQL client
-3. **Third-party Tools**: Any PostgreSQL-compatible database client
+1. **Drizzle Studio**: Run `npm run db:studio` for a web-based interface
+2. **pgAdmin**: Connect to `localhost:5432` with credentials from docker-compose.yml
+3. **Command Line**: Use `psql` or any PostgreSQL client
 
 Database credentials (from docker-compose.yml):
 - Host: `localhost`
@@ -419,47 +296,21 @@ This project is open source and available under the MIT License.
 1. **Database Connection Error**
    - Ensure PostgreSQL container is running: `npm run db:start`
    - Check `DATABASE_URL` environment variable
-   - Verify Docker is installed and running
 
 2. **Authentication Issues**
    - Verify `AUTH_SECRET` is set and minimum 32 characters
-   - Check database schema is up to date: `npm run db:push`
-   - Ensure email verification is complete for new accounts
+   - Check database schema is up to date
 
-3. **AI Chat Not Working**
-   - Verify `GEMINI_API_KEY` is set in `.env` file
-   - Check API key is valid and has proper permissions
-   - See `GEMINI_API_SETUP.md` for detailed setup instructions
-
-4. **Email Issues**
-   - Verify email environment variables are set correctly
-   - For Gmail, use an App Password instead of your regular password
-   - Check SMTP settings and firewall permissions
-
-5. **Build Errors**
+3. **Build Errors**
    - Run `npm install` to ensure all dependencies are installed
    - Check TypeScript errors with `npm run check`
-   - Clear node_modules and reinstall if needed
 
 ### Getting Help
 
 - Check the issues section of the repository
-- Review SvelteKit, Auth.js, and Drizzle ORM documentation
-- Use the AI chat assistant within the app for platform-specific help
+- Review SvelteKit and Auth.js documentation
 - Ensure all environment variables are properly configured
-- Check `GEMINI_API_SETUP.md` and `AI_CHAT_SETUP.md` for AI-related setup
-
-## 🎯 Key Features Summary
-
-✅ **Complete Authentication System** - Registration, login, email verification, password recovery  
-✅ **AI-Powered Chat Assistant** - Google Gemini AI integration with session management  
-✅ **Admin Dashboard** - User management, statistics, and system settings  
-✅ **Email Integration** - Automated notifications and verification emails  
-✅ **Modern UI/UX** - Responsive design with Tailwind CSS and smooth animations  
-✅ **Database Management** - PostgreSQL with Drizzle ORM and migrations  
-✅ **Security First** - bcrypt hashing, JWT sessions, CSRF protection  
-✅ **TypeScript** - Full type safety throughout the application  
 
 ---
 
-**Built with ❤️ using SvelteKit, Auth.js, Google Gemini AI, and PostgreSQL**
+**Built with ❤️ using SvelteKit, Auth.js, and PostgreSQL**
